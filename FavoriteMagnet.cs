@@ -1,4 +1,4 @@
-using Terraria.ModLoader;
+global using Terraria.ModLoader;
 
 namespace FavoriteMagnet
 {
