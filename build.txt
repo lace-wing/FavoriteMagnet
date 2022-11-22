@@ -1,0 +1,3 @@
+displayName = FavoriteMagnet
+author = Lacewing
+version = 0.1
