@@ -1,1 +1,29 @@
-FavoriteMagnet is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+﻿Item Magnet God (FavoriteMagnet) is a quality-of-life which adds an item attraction system and an item for you to configure it.
+
+With this mod, you can:
+- Attract all items
+- Attract items marked as favorite only
+- Attract items already in your inventory only
+- And the inverses of all above!
+- Enable a Encumbered effect, similar to the vanilla ENcumbering Stone but items attracted are NOT AFFECTED!
+- Set a attraction delay (3s by default), pretty useful for MULTI-PLAYER MODE!
+- Configure attraction range
+- Use these features without an item taking up your inventory space
+
+Craft your Item Magnet God's Favor now and enjoy your life as a Terrarian!
+
+--- --- ---
+
+物品磁铁神 (FavoriteMagnet) 是一个加入了物品吸引系统和一个用于配置它的物品的辅助模组
+
+你可以借助此模组: 
+- 吸引所有物品
+- 吸引收藏的物品
+- 吸引背包内已有的物品
+- 并且可以反选上述所有吸引选项!
+- 开启其特有的负重石效果, 与原版的负重石相似, 但是被吸引的物品不受影响!
+- 设置重复吸引延迟 (默认3秒), 对多人模式十分有用!
+- 配置吸引范围
+- 无需让一个物品占用你的背包就能使用这些功能
+
+现在就合成一个 "物品磁铁神的恩赐" 然后享受你的泰拉生活吧!

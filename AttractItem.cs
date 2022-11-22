@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -17,48 +18,40 @@ namespace FavoriteMagnet
         public List<Player> isAttractedBy = new List<Player>();
         public List<float> disesSqrd = new List<float>();
         public Player target;
-        public Dictionary<Player, int> delay = new Dictionary<Player, int>();
-
+        public int delay;
+        public Player delayPlayer;
         public override void Update(Item item, ref float gravity, ref float maxFallSpeed)
         {
-            //Main.NewText($"{isAttractedBy.Count}");
-            for (int i = 0; i < isAttractedBy.Count; i++)
+            while (isAttractedBy.Count > 0)
             {
-                Player plr = isAttractedBy[i];
-                int t = 180;
-                bool canGoTo = !delay.TryGetValue(plr, out t) || t <= 0;
-                if (canGoTo && plr.active)
+                int index = disesSqrd.IndexOf(disesSqrd.Min());
+                Player plr = isAttractedBy[index];
+                bool canGoTo = plr != delayPlayer || delay <= 0;
+                if (plr != null && canGoTo && !plr.dead)
                 {
                     target = plr;
-                }
-                //if (plr1 != null && plr1.active && canGoTo && disesSqrd[i == isAttractedBy.Count ? i : i + 1] <= disesSqrd[i])
-                //{
-                //    target = isAttractedBy[i];
-                //}
-            }
-
-            foreach (Player player in delay.Keys)
-            {
-                if (player == null)
-                {
-                    delay.Remove(player);
+                    break;
                 }
                 else
                 {
-                    delay[player] = Math.Max(--delay[player], 0);
-                    if (item.type == ItemID.Torch)
-                    {
-                        Main.NewText(delay[player]);
-                    }
+                    isAttractedBy.Remove(isAttractedBy[index]);
+                    disesSqrd.Remove(disesSqrd[index]);
                 }
             }
+
+            delay = Math.Max(--delay, 0);
 
             if (target != null)
             {
                 bool vacant = false;
-                for (int i = 0; i < 50; i++)
+                int max = 50;
+                if (item.IsACoin)
                 {
-                    if (target.inventory[i].IsAir)
+                    max = 54;
+                }
+                for (int i = 0; i < max; i++)
+                {
+                    if (target.inventory[i].IsAir || (target.inventory[i].type == item.type && target.inventory[i].stack < item.maxStack))
                     {
                         vacant = true;
                         break;
@@ -66,30 +59,50 @@ namespace FavoriteMagnet
                 }
                 if (vacant)
                 {
-                    //gravity = 0;
-                    item.position += Vector2.Normalize(target.Center - item.Center) * Math.Max(Vector2.DistanceSquared(target.Center, item.Center), 128f) / AttractionSystem.rangeSqrd;
+                    gravity = 0;
+                    Vector2 v = Vector2.Normalize(target.Center - item.Center) * Math.Clamp(Vector2.DistanceSquared(target.Center, item.Center) * 256 / AttractionSystem.rangeSqrd, 3.6f, 36f);
+                    item.velocity *= 0.98f;
+                    item.position += v;
+                    if (AttractionSystem.timer % 10 == 0)
+                    {
+                        Dust dust = Dust.NewDustPerfect(item.position, DustID.AncientLight);
+                        dust.noGravity = true;
+                        dust.velocity = Vector2.Zero;
+                    }
                 }
-            }
-
-            if (item.type == ItemID.Torch && Main.time % 60 == 0)
-            {
-                string s = target == null ? "null" : target.name;
-                // Main.NewText($"{isAttractedBy.Count} player is pulling, dis is {disesSqrd.Count}, target is {target.name}");\
-                CombatText.NewText(item.Hitbox, Color.White, $"{s} 1");
             }
         }
 
         public override void UpdateInventory(Item item, Player player)
         {
-            delay.TryAdd(player, 180);
-            if (delay[player] < 180)
-            {
-                delay[player] = 180;
-            }
-
+            delay = MagnetConfig.config.delaySecond * 60;
+            delayPlayer = player;
             isAttractedBy.Clear();
             disesSqrd.Clear();
             target = null;
+        }
+
+        public override bool OnPickup(Item item, Player player)
+        {
+            delay = MagnetConfig.config.delaySecond * 60;
+            delayPlayer = player;
+            isAttractedBy.Clear();
+            disesSqrd.Clear();
+            target = null;
+            return base.OnPickup(item, player);
+        }
+
+        public override bool CanPickup(Item item, Player player)
+        {
+            if ((delayPlayer != player || delay <= 0) && target == player)
+            {
+                return true;
+            }
+            else if (player.active && player.GetModPlayer<AttractivePlayer>().encumbered)
+            {
+                return false;
+            }
+            return base.CanPickup(item, player);
         }
     }
 }

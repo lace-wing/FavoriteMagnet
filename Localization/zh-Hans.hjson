@@ -1,0 +1,57 @@
+﻿Mods : 
+{
+	FavoriteMagnet : 
+	{
+		ItemName : 
+		{
+			FavoriteMagnet : 物品磁铁神的恩宠
+		}
+		ItemTooltip : 
+		{
+			FavoriteMagnet : 
+				'''
+				允许你调整你吸引物品的能力
+				左键使用以反转所吸引的物品种类
+				右键使用以切换至下一种吸引方案
+				右键单击该物品以开关其特有的负重石效果
+				此负重石效果不会影响该模组吸引的物品
+				屏幕右侧的一条信息显示了你的物品磁铁状态
+				你可以在背包中没有此物品的情况下吸引物品
+				更多自定义选项见模组配置
+				'''
+		}
+		InfoDisplayName : 
+		{
+			AttractionInfoDisplay : 物品磁铁
+		}
+		Info : 
+		{
+			AttractionInfo : 
+				'''
+				{0}{1}{2}
+				'''
+			Invert : 不
+			Not : 不吸引物品
+			Favorite : 吸引收藏的物品
+			Inventory : 吸引背包内已有的物品
+			All : 吸引所有物品
+			Encumbered : "\n负重石"
+		}
+		Config : 
+		{
+			Label : 物品磁铁神配置
+			Header : Item Magnet God's Config
+
+			Range : 
+			{
+				Label : 吸引范围（格）
+				Tooltip : 能吸到物品的距离
+			}
+			Delay : 
+			{
+				Label : 重复吸引延迟（秒）
+				Tooltip : 某玩家将物品丢出后，该物品一段时间内不会被吸向该玩家
+			}
+		}
+	}
+}
