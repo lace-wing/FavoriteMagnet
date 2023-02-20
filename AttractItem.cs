@@ -106,7 +106,7 @@ namespace FavoriteMagnet
             {
                 return true;
             }
-            else if (player.active && player.GetModPlayer<AttractivePlayer>().encumbered)
+            else if (player.active && player.GetModPlayer<AttractivePlayer>().Encumbered)
             {
                 return false;
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ModLoader.IO;
 
 namespace FavoriteMagnet
 {
@@ -16,77 +17,101 @@ namespace FavoriteMagnet
         /// <para>2 吸背包里的</para>
         /// <para>3 吸所有</para>
         /// </summary>
-        public int attractionMode;
-        public bool encumbered;
-        public bool invert;
-        public int selection;
+        public int AttractionMode;
+        public bool Encumbered;
+        public bool Invert;
+        public int Selection;
 
-        public List<int> itemToAttract = new List<int>();
+        public List<int> ItemToAttract = new List<int>();
 
         public override void ResetEffects()
         {
-            selection = 0;
-            itemToAttract = new List<int>();
+            Selection = 0;
+            ItemToAttract = new List<int>();
         }
 
         public override void UpdateEquips()
         {
-            if (invert && attractionMode == 0)
+            if (Invert && AttractionMode == 0)
             {
-                invert = false;
-                attractionMode = 3;
+                Invert = false;
+                AttractionMode = 3;
             }
-            if (invert && attractionMode == 3)
+            if (Invert && AttractionMode == 3)
             {
-                invert = false;
-                attractionMode = 0;
-            }
-
-            if (invert)
-            {
-                selection = 2;
+                Invert = false;
+                AttractionMode = 0;
             }
 
-            if (attractionMode == 0)
+            if (Invert)
+            {
+                Selection = 2;
+            }
+
+            if (AttractionMode == 0)
             {
                 if (AttractionSystem.itemEachPLayer.ContainsKey(Player))
                 {
                     AttractionSystem.itemEachPLayer.Remove(Player);
                 }
             }
-            if (attractionMode == 1)
+            if (AttractionMode == 1)
             {
                 foreach (Item item in Player.inventory)
                 {
                     if (item.favorited)
                     {
-                        itemToAttract.Add(item.type);
+                        ItemToAttract.Add(item.type);
                     }
                 }
-                if (itemToAttract.Count() > 0)
+                if (ItemToAttract.Count() > 0)
                 {
                     AttractionSystem.itemEachPLayer.Remove(Player);
-                    AttractionSystem.itemEachPLayer.TryAdd(Player, (selection, itemToAttract));
+                    AttractionSystem.itemEachPLayer.TryAdd(Player, (Selection, ItemToAttract));
                 }
             }
-            if (attractionMode == 2)
+            if (AttractionMode == 2)
             {
                 foreach (Item item in Player.inventory)
                 {
-                    itemToAttract.Add(item.type);
+                    ItemToAttract.Add(item.type);
                 }
-                if (itemToAttract.Count() > 0)
+                if (ItemToAttract.Count() > 0)
                 {
                     AttractionSystem.itemEachPLayer.Remove(Player);
-                    AttractionSystem.itemEachPLayer.TryAdd(Player, (selection, itemToAttract));
+                    AttractionSystem.itemEachPLayer.TryAdd(Player, (Selection, ItemToAttract));
                 }
             }
-            if (attractionMode == 3)
+            if (AttractionMode == 3)
             {
-                selection = 1;
+                Selection = 1;
                 AttractionSystem.itemEachPLayer.Remove(Player);
-                AttractionSystem.itemEachPLayer.TryAdd(Player, (selection, itemToAttract));
+                AttractionSystem.itemEachPLayer.TryAdd(Player, (Selection, ItemToAttract));
             }
+        }
+        public override void Load()
+        {
+            AttractionMode = 0;
+            Encumbered = false;
+            Invert = false;
+        }
+        public override void Unload()
+        {
+            AttractionMode = 0;
+            Encumbered = false;
+            Invert = false;
+        }
+        public override void SaveData(TagCompound tag)
+        {
+            tag["AttractionMode"] = AttractionMode;
+            tag["Encumbered"] = Encumbered;
+            tag["Invert"] = Invert;
+        }
+        public override void LoadData(TagCompound tag)
+        {
+            AttractionMode = tag.GetInt("AttractionMode");
+            Encumbered = tag.GetBool("Encumbered");
+            Invert = tag.GetBool("Invert");
         }
     }
 }

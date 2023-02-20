@@ -23,9 +23,9 @@ namespace FavoriteMagnet
             string key1 = "Mods.FavoriteMagnet.Info.", key2 = "";
             if (p.active)
             {
-                m = p.GetModPlayer<AttractivePlayer>().attractionMode;
-                i = p.GetModPlayer<AttractivePlayer>().invert;
-                e = p.GetModPlayer<AttractivePlayer>().encumbered;
+                m = p.GetModPlayer<AttractivePlayer>().AttractionMode;
+                i = p.GetModPlayer<AttractivePlayer>().Invert;
+                e = p.GetModPlayer<AttractivePlayer>().Encumbered;
             }
             if (m == 0)
             {

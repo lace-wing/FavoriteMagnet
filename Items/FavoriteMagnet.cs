@@ -41,15 +41,15 @@ namespace FavoriteMagnet.Items
 			{
 				if (player.altFunctionUse == 2)
 				{
-					player.GetModPlayer<AttractivePlayer>().attractionMode++;
-					if (player.GetModPlayer<AttractivePlayer>().attractionMode > 3)
+					player.GetModPlayer<AttractivePlayer>().AttractionMode++;
+					if (player.GetModPlayer<AttractivePlayer>().AttractionMode > 3)
 					{
-						player.GetModPlayer<AttractivePlayer>().attractionMode = 0;
+						player.GetModPlayer<AttractivePlayer>().AttractionMode = 0;
 					}
 				}
 				else
 				{
-					player.GetModPlayer<AttractivePlayer>().invert = !player.GetModPlayer<AttractivePlayer>().invert;
+					player.GetModPlayer<AttractivePlayer>().Invert = !player.GetModPlayer<AttractivePlayer>().Invert;
 				}
 			}
 			return base.UseItem(player);
@@ -67,7 +67,7 @@ namespace FavoriteMagnet.Items
 
 		public override void RightClick(Player player)
 		{
-			player.GetModPlayer<AttractivePlayer>().encumbered = !player.GetModPlayer<AttractivePlayer>().encumbered;
+			player.GetModPlayer<AttractivePlayer>().Encumbered = !player.GetModPlayer<AttractivePlayer>().Encumbered;
 		}
 
 		public override void AddRecipes()
