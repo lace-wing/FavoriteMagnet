@@ -33,7 +33,7 @@ namespace FavoriteMagnet
                         float disSqrd = Vector2.DistanceSquared(item.Center, player.Center);
                         if (disSqrd <= rangeSqrd)
                         {
-                            if (item.active)
+                            if (!item.IsAir)
                             {
                                 if (sample.Item1 == 1 || (sample.Item1 == 0 && sample.Item2.Contains(item.type)) || (sample.Item1 == 2 && !sample.Item2.Contains(item.type)))
                                 {

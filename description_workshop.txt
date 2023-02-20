@@ -1,0 +1,18 @@
+﻿Item Magnet God (FavoriteMagnet) is a quality-of-life which adds an item attraction system and an item for you to configure it.
+
+[h3]With this mod, you can:[/h3]
+- Attract all items
+- Attract items marked as favorite only
+- Attract items already in your inventory only
+- And the inverses of all above!
+- Enable a Encumbered effect, similar to the vanilla ENcumbering Stone but items attracted are NOT AFFECTED!
+- Set a attraction delay (3s by default), pretty useful for MULTI-PLAYER MODE!
+- Configure attraction range
+- Use these features without an item taking up your inventory space
+
+[h3]How to use:[/h3]
+1. Get 2 Clay Blocks, 4 Dirt Blocks, stand nearby a workbench (fairly easy to follow)
+2. Craft an item called 'Item Magnet God's Favor'
+3. Read it's tooltip and use it
+
+Craft your Item Magnet God's Favor now and enjoy your life as a Terrarian!

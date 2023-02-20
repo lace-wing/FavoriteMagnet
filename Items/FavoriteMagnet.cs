@@ -17,7 +17,7 @@ namespace FavoriteMagnet.Items
 		public override void SetDefaults()
 		{
 			Item.damage = 12;
-			Item.DamageType = DamageClass.Melee;
+			Item.DamageType = DamageClass.Default;
 			Item.width = 32;
 			Item.height = 30;
 			Item.useTime = 24;
