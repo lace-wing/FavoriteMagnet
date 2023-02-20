@@ -1,0 +1,5 @@
+﻿v1.0.0.1
+
+改进了吸取筛选机制: 心, 星星和魔法斗篷星即使在背包满时或开启了磁铁负重石效果时也能被吸取或拾取
+
+Improved filtering mechanics: Hearts, Stars and Mana Clock Stars can still be attracted or picked when inventory is full or the magnet's Encumbered effect is active

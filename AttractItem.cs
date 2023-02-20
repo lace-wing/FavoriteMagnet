@@ -57,10 +57,14 @@ namespace FavoriteMagnet
                         break;
                     }
                 }
+                if (item.type == ItemID.Heart || item.type == ItemID.CandyApple || item.type == ItemID.CandyCane || item.type == ItemID.Star || item.type == ItemID.SoulCake || item.type == ItemID.SugarPlum || item.type == ItemID.ManaCloakStar)
+                {
+                    vacant = true;
+                }
                 if (vacant)
                 {
                     gravity = 0;
-                    Vector2 v = Vector2.Normalize(target.Center - item.Center) * Math.Clamp(Vector2.DistanceSquared(target.Center, item.Center) * 256 / AttractionSystem.rangeSqrd, 3.6f, 36f);
+                    Vector2 v = Vector2.Normalize(target.Center - item.Center) * Math.Clamp(Vector2.DistanceSquared(target.Center, item.Center) * 256 / AttractionSystem.rangeSqrd, 7.2f, 36f);
                     item.velocity *= 0.98f;
                     item.position += v;
                     if (AttractionSystem.timer % 10 == 0)
@@ -95,6 +99,10 @@ namespace FavoriteMagnet
         public override bool CanPickup(Item item, Player player)
         {
             if ((delayPlayer != player || delay <= 0) && target == player)
+            {
+                return true;
+            }
+            else if (item.type == ItemID.Heart || item.type == ItemID.CandyApple || item.type == ItemID.CandyCane || item.type == ItemID.Star || item.type == ItemID.SoulCake || item.type == ItemID.SugarPlum || item.type == ItemID.ManaCloakStar)
             {
                 return true;
             }
