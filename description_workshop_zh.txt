@@ -1,4 +1,8 @@
-﻿物品磁铁神 (FavoriteMagnet) 是一个加入了物品吸引系统和一个用于配置它的物品的辅助模组
+﻿[h1]物品磁铁神, 你值得一试的物品磁铁模组[/h1]
+
+[img=https://imgur.com/p7Fv1Z6.gif][/img]
+
+物品磁铁神 (FavoriteMagnet) 是一个加入了物品吸引系统和一个用于配置它的物品的辅助模组
 
 [h3]你可以借助此模组:[/h3]
 - 吸引所有物品
@@ -16,3 +20,5 @@
 3. 阅读其描述并使用它
 
 现在就合成一个 "物品磁铁神的恩赐" 然后享受你的泰拉生活吧!
+
+此模组在[url=https://github.com/lyc-Lacewing/FavoriteMagnet]GitHub[/url]上开源

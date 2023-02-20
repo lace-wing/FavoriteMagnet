@@ -1,4 +1,8 @@
-﻿Item Magnet God (FavoriteMagnet) is a quality-of-life which adds an item attraction system and an item for you to configure it.
+﻿[h1]Item Magnet God, your choice of item magnet![/h1]
+
+[img=https://imgur.com/p7Fv1Z6.gif][/img]
+
+Item Magnet God (FavoriteMagnet) is a quality-of-life mod which adds an item attraction system and an item for you to configure it.
 
 [h3]With this mod, you can:[/h3]
 - Attract all items
@@ -16,3 +20,5 @@
 3. Read it's tooltip and use it
 
 Craft your Item Magnet God's Favor now and enjoy your life as a Terrarian!
+
+This mod is open-sourced on [url=https://github.com/lyc-Lacewing/FavoriteMagnet]GitHub[/url]
