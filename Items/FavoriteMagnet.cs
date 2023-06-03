@@ -7,13 +7,6 @@ namespace FavoriteMagnet.Items
 {
 	public class FavoriteMagnet : ModItem
 	{
-        public int mode;
-		public int range;
-		/// <summary>
-		/// 负重石是否开启, 所吸取的物品不受影响
-		/// </summary>
-		public bool encumbering;
-
 		public override void SetDefaults()
 		{
 			Item.damage = 12;
@@ -41,15 +34,9 @@ namespace FavoriteMagnet.Items
 			{
 				if (player.altFunctionUse == 2)
 				{
-					player.GetModPlayer<AttractivePlayer>().AttractionMode++;
-					if (player.GetModPlayer<AttractivePlayer>().AttractionMode > 3)
-					{
-						player.GetModPlayer<AttractivePlayer>().AttractionMode = 0;
-					}
 				}
 				else
 				{
-					player.GetModPlayer<AttractivePlayer>().Invert = !player.GetModPlayer<AttractivePlayer>().Invert;
 				}
 			}
 			return base.UseItem(player);
@@ -67,7 +54,6 @@ namespace FavoriteMagnet.Items
 
 		public override void RightClick(Player player)
 		{
-			player.GetModPlayer<AttractivePlayer>().Encumbered = !player.GetModPlayer<AttractivePlayer>().Encumbered;
 		}
 
 		public override void AddRecipes()
