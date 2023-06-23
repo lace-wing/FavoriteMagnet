@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,26 +10,25 @@ namespace FavoriteMagnet
 {
     public class MagPlayer : ModPlayer
     {
-        
-        public Select Selection = Select.None;
+        public EnumNum<Select> Selection = new EnumNum<Select>();
         public bool Invert;
 
         public override void SaveData(TagCompound tag)
         {
-            tag.Add("Selection", Selection);
+            tag.Add("Selection", Selection.Index);
             tag.Add("Invert", Invert);
         }
         public override void LoadData(TagCompound tag)
         {
-            Selection = (Select)tag.GetInt("Selection");
+            Selection.Index = tag.GetInt("Selection");
             Invert = tag.GetBool("Invert");
         }
     }
     public enum Select
-        {
-            None,
-            Favorite,
-            Existing,
-            All
-        }
+    {
+        None,
+        Favorite,
+        Existing,
+        All
+    }
 }

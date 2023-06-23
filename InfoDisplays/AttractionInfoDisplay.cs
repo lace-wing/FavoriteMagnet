@@ -11,7 +11,7 @@ namespace FavoriteMagnet.InfoDisplays
 {
     public class AttractionInfoDisplay : InfoDisplay
     {
-        public LocalizedText Display = new LocalizedText();
+        public LocalizedText Display { get; set; }
         public override void Load()
         {
             _ = Display;

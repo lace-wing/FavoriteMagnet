@@ -5,235 +5,132 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using Terraria.GameContent.NetModules;
 
 namespace FavoriteMagnet
 {
-    public static class Util
+    public static class Num
     {
         public static bool Within(this int i, int min, int max)
         {
             return i >= min && i <= max;
         }
-        public static void Plus(this ref EnInt x, int y)
-        {
-            x = EnInt.Clone(x, x + y);
-        }
-        public static void Minus(this ref EnInt x, int y)
-        {
-            x = EnInt.Clone(x, x - y);
-        }
-        public static void Multiply(this ref EnInt x, int y)
-        {
-            x = EnInt.Clone(x, x * y);
-        }
-        public static void Divide(this ref EnInt x, int y)
-        {
-            x = EnInt.Clone(x, x / y);
-        }
     }
-    public struct EnInt
+    public class EnumNum<T> where T : Enum
     {
         public enum Limit
         {
             Cap,
             Cycle,
-            ReMin,
-            ReMax
+            First,
+            Last,
+            Bounce
         }
 
-        private int value;
-        private int min;
-        private int max;
-        public int Value { get { return value; } private set { this.value = value; } }
-        public int Min
+        public T EType;
+        public int Index;
+        public Limit Limiting = Limit.Cycle;
+        public object Value
         {
             get
             {
-                return min;
-            }
-            set
-            {
-                min = value;
-                max = Math.Max(value, max);
-                this.value = this + 0;
+                return Enum.GetValues(typeof(T)).GetValue(Index);
             }
         }
-        public int Max
+        public int Count
         {
             get
             {
-                return max;
-            }
-            set
-            {
-                max = value;
-                min = Math.Min(value, min);
-                this.value = this + 0;
+                return Enum.GetValues(typeof(T)).Length;
             }
         }
-        public Limit Limiting;
-
-        public EnInt()
+        public EnumNum(int index = 0, Limit limiting = Limit.Cycle)
         {
-            Value = 0;
-            Min = int.MinValue;
-            Max = int.MaxValue;
-            Limiting = Limit.Cap;
-        }
-        public EnInt(int value)
-        {
-            Value = value;
-            Min = int.MinValue;
-            Max = int.MaxValue;
-            Limiting = Limit.Cap;
-        }
-        public EnInt(int value, int min, int max, Limit limiting)
-        {
-            Value = value;
-            Min = min;
-            Max = max;
+            Index = index;
             Limiting = limiting;
         }
-        public static int operator +(EnInt x, int y)
+        public EnumNum(T type, int index = 0, Limit limiting = Limit.Cycle)
         {
-            int result = x.value + y;
-            if (result.Within(x.min, x.max))
-            {
-                return result;
-            }
-            switch (x.Limiting)
-            {
-                default:
-                    return Math.Clamp(result, x.min, x.max);
-                case Limit.Cycle:
-                    if (result < x.min)
-                    {
-                        result = x.max + (result - x.min) % (x.min - x.max);
-                    }
-                    else
-                    {
-                        result = x.min + (result - x.max) % (x.max - x.min);
-                    }
-                    return result;
-                case Limit.ReMin:
-                    return x.min;
-                case Limit.ReMax:
-                    return x.max;
-            }
-        }
-        public static int operator -(EnInt x, int y)
-        {
-            int result = x.value - y;
-            if (result.Within(x.min, x.max))
-            {
-                return result;
-            }
-            switch (x.Limiting)
-            {
-                default:
-                    return Math.Clamp(result, x.min, x.max);
-                case Limit.Cycle:
-                    if (result < x.min)
-                    {
-                        result = x.max + (result - x.min) % (x.min - x.max);
-                    }
-                    else
-                    {
-                        result = x.min + (result - x.max) % (x.max - x.min);
-                    }
-                    return result;
-                case Limit.ReMin:
-                    return x.min;
-                case Limit.ReMax:
-                    return x.max;
-            }
-        }
-        public static int operator *(EnInt x, int y)
-        {
-            int result = x.value * y;
-            if (result.Within(x.min, x.max))
-            {
-                return result;
-            }
-            switch (x.Limiting)
-            {
-                default:
-                    return Math.Clamp(result, x.min, x.max);
-                case Limit.Cycle:
-                    if (result < x.min)
-                    {
-                        result = x.max + (result - x.min) % (x.min - x.max);
-                    }
-                    else
-                    {
-                        result = x.min + (result - x.max) % (x.max - x.min);
-                    }
-                    return result;
-                case Limit.ReMin:
-                    return x.min;
-                case Limit.ReMax:
-                    return x.max;
-            }
-        }
-        public static int operator /(EnInt x, int y)
-        {
-            int result = x.value / y;
-            if (result.Within(x.min, x.max))
-            {
-                return result;
-            }
-            switch (x.Limiting)
-            {
-                default:
-                    return Math.Clamp(result, x.min, x.max);
-                case Limit.Cycle:
-                    if (result < x.min)
-                    {
-                        result = x.max + (result - x.min) % (x.min - x.max);
-                    }
-                    else
-                    {
-                        result = x.min + (result - x.max) % (x.max - x.min);
-                    }
-                    return result;
-                case Limit.ReMin:
-                    return x.min;
-                case Limit.ReMax:
-                    return x.max;
-            }
-        }
-        public static int operator %(EnInt x, int y)
-        {
-            return x.value % y;
+            EType = type;
+            Index = index;
+            Limiting = limiting;
         }
 
-        public static EnInt Clone(EnInt x)
+        private static int changeIndex(int index, int change, int count, Limit limiting)
         {
-            return new EnInt(x.value, x.min, x.max, x.Limiting);
+            int result = index + change;
+            bool high = result >= count, low = result < 0;
+            if (!high && !low)
+            {
+                return result;
+            }
+
+            if (limiting == Limit.Cap)
+            {
+                if (high)
+                {
+                    return count - 1;
+                }
+                return 0;
+            }
+            if (limiting == Limit.Cycle)
+            {
+                if (high)
+                {
+                    return result % count;
+                }
+                return count - 1 + result % count;
+            }
+            if (limiting == Limit.First)
+            {
+                return 0;
+            }
+            if (limiting == Limit.Last)
+            {
+                return count - 1;
+            }
+            if (limiting == Limit.Bounce)
+            {
+                change %= ((count - 1) * 2);
+                int dir = high ? 1 : -1;
+                result = index;
+                for (int i = 0; i < change; i++, result += dir)
+                {
+                    if (result == count - 1 || result == 0)
+                    {
+                        dir *= -1;
+                    }
+                }
+                return result;
+            }
+            return result;
         }
-        public static EnInt Clone(EnInt x, int value)
+
+        public static EnumNum<T> operator +(EnumNum<T> num, int addition)
         {
-            return new EnInt(x.value, x.min, x.max, x.Limiting);
+            num.Index = changeIndex(num.Index, addition, num.Count, num.Limiting);
+            return num;
         }
-        public static EnInt Clone(EnInt x, int value, int min, int max, Limit limiting)
+        public static EnumNum<T> operator -(EnumNum<T> num, int subtraction)
         {
-            return new EnInt(x.value, min, max, limiting);
+            num.Index = changeIndex(num.Index, subtraction, num.Count, num.Limiting);
+            return num;
         }
-        public static void Plus(ref EnInt x, int y)
+        public static EnumNum<T> operator *(EnumNum<T> num, int multiply)
         {
-            x = Clone(x, x + y);
+            num.Index = changeIndex(num.Index, num.Index * multiply, num.Count, num.Limiting);
+            return num;
         }
-        public static void Minus(ref EnInt x, int y)
+        public static EnumNum<T> operator /(EnumNum<T> num, int divide)
         {
-            x = Clone(x, x - y);
+            num.Index = changeIndex(num.Index, num.Index / divide, num.Count, num.Limiting);
+            return num;
         }
-        public static void Multiply(ref EnInt x, int y)
+        public static EnumNum<T> operator %(EnumNum<T> num, int module)
         {
-            x = Clone(x, x * y);
-        }
-        public static void Divide(ref EnInt x, int y)
-        {
-            x = Clone(x, x / y);
+            num.Index = changeIndex(num.Index, num.Index % module, num.Count, num.Limiting);
+            return num;
         }
     }
 }

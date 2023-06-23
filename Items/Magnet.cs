@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace FavoriteMagnet.Items
 {
-	public class FavoriteMagnet : ModItem
+	public class Magnet : ModItem
 	{
 		public override void SetDefaults()
 		{
