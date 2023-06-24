@@ -42,11 +42,11 @@ namespace FavoriteMagnet
                 limit = Math.Clamp(value, 0, Count);
             }
         }
-        public object Value
+        public T Value
         {
             get
             {
-                return Enum.GetValues(typeof(T)).GetValue(Index);
+                return (T)Enum.GetValues(typeof(T)).GetValue(Index);
             }
         }
         public int Count
@@ -54,6 +54,13 @@ namespace FavoriteMagnet
             get
             {
                 return Enum.GetValues(typeof(T)).Length;
+            }
+        }
+        public T[] Values
+        {
+            get
+            {
+                return (T[])Enum.GetValues(typeof(T));
             }
         }
         public EnumNum(int index = 0, Limit limiting = Limit.Cycle)
@@ -142,6 +149,30 @@ namespace FavoriteMagnet
         {
             num.Index = changeIndex(num.Index, num.Index % module, num.Count, num.Limiting);
             return num;
+        }
+        public static bool operator ==(EnumNum<T> num, T @enum)
+        {
+            if (!num.Values.Contains(@enum))
+            {
+                return false;
+            }
+            if (num.Values.ToList().IndexOf(@enum) == num.Index)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool operator !=(EnumNum<T> num, T @enum)
+        {
+            if (!num.Values.Contains(@enum))
+            {
+                return true;
+            }
+            if (num.Values.ToList().IndexOf(@enum) == num.Index)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
