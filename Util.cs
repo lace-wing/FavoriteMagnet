@@ -29,8 +29,19 @@ namespace FavoriteMagnet
         }
 
         public T EType;
-        public int Index;
         public Limit Limiting = Limit.Cycle;
+        private int limit;
+        public int Index
+        {
+            get
+            {
+                return limit;
+            }
+            set
+            {
+                limit = Math.Clamp(value, 0, Count);
+            }
+        }
         public object Value
         {
             get
