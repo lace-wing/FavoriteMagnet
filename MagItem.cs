@@ -12,21 +12,25 @@ namespace ItemMagnetPro
 {
     internal class MagItem : GlobalItem
     {
-        public Player? Target;
+        public Player Target;
         public int ReserveCD;
         public static int MaxSpeed = 36;
-        public static int MinSpeed = 9;
+        public static int MinSpeed = 18;
         public override bool InstancePerEntity => true;
 
-        private Vector2 CalcVelocity(Item item)
+        private Vector2 CalcPosChange(Item item)
         {
-            float mult = MathHelper.Lerp(MinSpeed, MaxSpeed, Target.Center.DistanceSQ(item.position) * (1f / MagPlayer.RangeSQ));
-            return (Target.Center - item.position).SafeNormalize(Vector2.Zero) * mult;
-        }
-        private static void TargetMode(Item item, ref float gravity, ref float maxFallSpeed)
-        {
-            gravity = 0;
-            maxFallSpeed = 0;
+            if (!Target.TryGetModPlayer(out MagPlayer mp))
+            {
+                return Vector2.Zero;
+            }
+            if (mp.Approach == Approach.Teleport)
+            {
+                return Target.Center - item.position;
+            }
+            float speed = MathHelper.Lerp(MinSpeed, MaxSpeed, Target.Center.DistanceSQ(item.position) * (1f / MagPlayer.RangeSQ));
+            Vector2 dir = (Target.Center - item.position).SafeNormalize(Vector2.Zero);
+            return dir * speed;
         }
 
         public override void Update(Item item, ref float gravity, ref float maxFallSpeed)
@@ -35,8 +39,9 @@ namespace ItemMagnetPro
             if (Target != null)
             {
                 ReserveCD = 0;
-                TargetMode(item, ref gravity, ref maxFallSpeed);
-                item.position += CalcVelocity(item);
+                gravity = 0;
+                maxFallSpeed = 0;
+                item.position = item.position + CalcPosChange(item);
                 if (MagSystem.Timely)
                 {
                     Dust d = Dust.NewDustPerfect(item.position, DustID.AncientLight);
@@ -51,7 +56,7 @@ namespace ItemMagnetPro
         }
         public override bool CanPickup(Item item, Player player)
         {
-            if (Target != player && player.GetModPlayer<MagPlayer>().ItemBehavior == ItemAction.Encumber)
+            if (Target != player && player.GetModPlayer<MagPlayer>().ItemAction == ItemAction.Encumber)
             {
                 return false;
             }
@@ -59,7 +64,7 @@ namespace ItemMagnetPro
         }
         public override bool OnPickup(Item item, Player player)
         {
-            if (Target == player && player.GetModPlayer<MagPlayer>().ItemBehavior == ItemAction.Exhaust)
+            if (Target == player && player.GetModPlayer<MagPlayer>().ItemAction == ItemAction.Exhaust)
             {
                 item.TurnToAir();
                 return false;

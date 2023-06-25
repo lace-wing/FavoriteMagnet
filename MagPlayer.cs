@@ -16,7 +16,8 @@ namespace ItemMagnetPro
         public static int RangeSQ;
         public static int Delay;
         public EnumNum<Select> Selection = new EnumNum<Select>();
-        public EnumNum<ItemAction> ItemBehavior = new EnumNum<ItemAction>();
+        public EnumNum<ItemAction> ItemAction = new EnumNum<ItemAction>();
+        public EnumNum<Approach> Approach = new EnumNum<Approach>();
         private bool ItemFitsInventory(Item item, bool ignoreVanillaEncumber = true)
         {
             var status = Player.ItemSpace(item);
@@ -113,10 +114,14 @@ namespace ItemMagnetPro
         public override void SaveData(TagCompound tag)
         {
             tag.Add("Selection", Selection.Index);
+            tag.Add("ItemAction", ItemAction.Index);
+            tag.Add("Approach", Approach.Index);
         }
         public override void LoadData(TagCompound tag)
         {
             Selection.Index = tag.GetInt("Selection");
+            ItemAction.Index = tag.GetInt("ItemAction");
+            Approach.Index = tag.GetInt("Approach");
         }
     }
     public enum Select
@@ -133,5 +138,10 @@ namespace ItemMagnetPro
         None,
         Encumber,
         Exhaust
+    }
+    public enum Approach
+    {
+        Travel,
+        Teleport
     }
 }

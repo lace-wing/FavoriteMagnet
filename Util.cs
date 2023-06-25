@@ -174,5 +174,13 @@ namespace ItemMagnetPro
             }
             return true;
         }
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+        public int ToInt()
+        {
+            return Index;
+        }
     }
 }

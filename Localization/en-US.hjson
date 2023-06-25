@@ -1,9 +1,22 @@
 Mods: {
 	ItemMagnetPro: {
+		General:{
+			Di: "{0}{1}"
+			DiSpaced: "{0} {1}"
+		}
+
 		Items: {
 			Magnet: {
-				DisplayName: Magnet Pro
-				Tooltip: ""
+				DisplayName: Item Magnet Pro
+				Tooltip:
+					'''
+					Allows you to configure item-attracting abilities.
+					You have 3 abilities:
+					- Selection: only selected items will be attracted. (<left>)
+					- Action: something will happen on the items. (<right>)
+					- Approach: items will approach you in different manners. (<right> on this item)
+					You don't have to keep this item in your inventory.
+					'''
 			}
 		}
 
@@ -35,6 +48,34 @@ Mods: {
 				NotFavorited: Favorited excluded
 				Existing: Inventory only
 				NotExisting: Inventory excluded
+			}
+
+			ItemActions: {
+				None: ""
+				Encumber: " !"
+				Exhaust: " x"
+			}
+		}
+
+		Tooltips: {
+			Selections: {
+				All: Attract all items.
+				None: No attraction.
+				Favorited: Attract favorited items only.
+				NotFavorited: Attract non-favorited items only.
+				Existing: Attract items in inventory only.
+				NotExisting: Attract items not in inventory only.
+			}
+
+			ItemActions: {
+				None: Items are to be picked up as ususal.
+				Encumber: Only attracted items can be picked up.
+				Exhaust: Attracted items will be exhausted on pickup.
+			}
+
+			Approaches: {
+				Travel: Attracted items will travel to you.
+				Teleport: Attracted items will teleport to you.
 			}
 		}
 	}
