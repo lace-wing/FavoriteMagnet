@@ -1,8 +1,6 @@
-﻿[h1]Item Magnet God, your choice of item magnet![/h1]
+﻿[h1]Item Magnet Pro, your choice of item magnet![/h1]
 
-[img=https://imgur.com/p7Fv1Z6.gif][/img]
-
-Item Magnet God (FavoriteMagnet) is a quality-of-life mod which adds an item attraction system and an item for you to configure it.
+Item Magnet Pro is a quality-of-life mod which adds an item attraction system and an item for you to configure it.
 
 [h3]With this mod, you can:[/h3]
 - Attract all items
@@ -15,10 +13,8 @@ Item Magnet God (FavoriteMagnet) is a quality-of-life mod which adds an item att
 - Use these features without an item taking up your inventory space
 
 [h3]How to use:[/h3]
-1. Get 2 Clay Blocks, 4 Dirt Blocks, stand nearby a workbench (fairly easy to follow)
-2. Craft an item called 'Item Magnet God's Favor'
+1. Get 4 Dirt Blocks, stand nearby a workbench (fairly easy to follow)
+2. Craft an item called 'Item Magnet Pro'
 3. Read it's tooltip and use it
-
-Craft your Item Magnet God's Favor now and enjoy your life as a Terrarian!
 
 This mod is open-sourced on [url=https://github.com/lyc-Lacewing/FavoriteMagnet]GitHub[/url]

@@ -1,7 +1,1 @@
-﻿v1.0.1.0
-
-- 修复了捡起物品时可能卡死的漏洞
-- 玩家的吸取模式现在会保存
-
-- Fixed an error which may occur when items are picked up
-- Player's attraction mode now will be saved
+﻿Item Magnet Pro, reborn from Item Magnet God, now on 1.4.4!
