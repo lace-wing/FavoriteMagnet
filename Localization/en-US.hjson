@@ -1,6 +1,6 @@
 Mods: {
 	ItemMagnetPro: {
-		General:{
+		General: {
 			Di: "{0}{1}"
 			DiSpaced: "{0} {1}"
 		}
