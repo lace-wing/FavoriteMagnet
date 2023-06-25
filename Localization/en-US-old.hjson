@@ -1,45 +1,13 @@
 Mods: {
 	FavoriteMagnet: {
-		ItemName.FavoriteMagnet: Item Magnet God's Favor
-		ItemTooltip.FavoriteMagnet:
-			'''
-			Allows you to configure your item-attracting ability
-			Use with left click to invert attraction filter
-			Use with right click to go to the next filter
-			Right click on this item to toggle it's Encumbering Stone function
-			This Encumbered effect does not affect items sorted by the filter
-			An info at the right side display shows your item magnet status
-			You can attract items even without this item being in your inventory
-			See mod configs for more customization options
-			'''
-		InfoDisplayName.AttractionInfoDisplay: Item Magnet
-
 		Info: {
-			AttractionInfo: "{0}{1}{2}"
-			Invert: "Does not "
-			Not: No attraction
-			Favorite: Attract favored items
-			Inventory: Attract items in inventory
-			All: Attract all items
-			Encumbered:
-				'''
-
-				Encumbered
-				'''
 		}
 
 		Config: {
-			Label: Item Magnet God Config
-			Header: Item Magnet God's Config
-
 			Range: {
-				Label: Attraction Range (tile)
-				Tooltip: The range which items within can be attracted
 			}
 
 			Delay: {
-				Label: Repeated Attraction Delay (second)
-				Tooltip: After a player drops an item, the item will not be attracted to that player for a period of time
 			}
 		}
 

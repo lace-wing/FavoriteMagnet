@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 
-namespace FavoriteMagnet
+namespace ItemMagnetPro
 {
     internal class MagSystem : ModSystem
     {
@@ -24,6 +24,7 @@ namespace FavoriteMagnet
                     mag.Target = null;
                 }
                 ItemPool = Main.item.ToList();
+                ItemPool.RemoveAll(i => !i.active);
             }
         }
     }

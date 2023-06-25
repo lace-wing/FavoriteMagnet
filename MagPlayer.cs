@@ -9,101 +9,88 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader.IO;
 
-namespace FavoriteMagnet
+namespace ItemMagnetPro
 {
     public class MagPlayer : ModPlayer
     {
         public EnumNum<Select> Selection = new EnumNum<Select>();
-        public bool Invert;
-        private bool InvVacant
+        public EnumNum<ItemAction> ItemBehavior = new EnumNum<ItemAction>();
+        private bool ItemFitsInventory(Item item, bool ignoreVanillaEncumber = true)
         {
-            get
+            var status = Player.ItemSpace(item);
+            if (status.CanTakeItem)
             {
-                bool vacant = false;
-                foreach(Item item in Player.inventory)
-                {
-                    if (item.IsAir)
-                    {
-                        vacant = true;
-                        break;
-                    }
-                }
-                return vacant;
+                return ignoreVanillaEncumber || (Player.preventAllItemPickups && ItemID.Sets.IgnoresEncumberingStone[item.type]);
             }
+            return false;
         }
-        private bool VVVacant
+        private bool SelectFavorited(Item item)
         {
-            get
+            foreach (Item i in Player.inventory)
             {
-                if (!Player.IsVoidVaultEnabled)
+                if (i.favorited && i.type == item.type)
                 {
-                    return false;
+                    return true;
                 }
-                bool vacant = false;
-                foreach(Item item in Player.bank4.item)
-                {
-                    if (item.IsAir)
-                    {
-                        vacant = true;
-                        break;
-                    }
-                }
-                return vacant;
             }
+            return false;
         }
-        private bool ItemSelected(Item item)
+        private bool SelectExisting(Item item)
+        {
+            foreach (Item i in Player.inventory)
+            {
+                if (i.type == item.type)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private bool IsItemSelected(Item item)
         {
             if (Selection == Select.All)
             {
                 return true;
             }
-            if (Selection == Select.None)
+            if (Selection == Select.Favorite)
             {
-                return false;
+                return SelectFavorited(item);
+            }
+            if (Selection == Select.NotFavorite)
+            {
+                return !SelectFavorited(item);
             }
             if (Selection == Select.Existing)
             {
-                foreach (Item i in Player.inventory)
-                {
-                    if (i.type == item.type)
-                    {
-                        return true;
-                    }
-                }
-                return false;
+                return SelectExisting(item);
             }
-            if (Selection == Select.Favorite)
+            if (Selection == Select.NotExisting)
             {
-                foreach (Item i in Player.inventory)
-                {
-                    if (i.favorited && i.type == item.type)
-                    {
-                        return true;
-                    }
-                }
-                return false;
+                return !SelectExisting(item);
             }
             return false;
         }
         private bool CanAttract(Item item)
         {
-            if (!item.TryGetGlobalItem(out MagItem magItem) || magItem.Holder == null || (magItem.Holder == Player && magItem.HolderCD > 0))
+            if (item.position.DistanceSQ(Player.Center) > 256 * 256)
             {
                 return false;
             }
-            if (item.position.DistanceSQ(Player.Center) > 256)
-            if (ItemID.Sets.IgnoresEncumberingStone.Contains() && !InvVacant && !VVVacant)
+            if (!item.TryGetGlobalItem(out MagItem magItem) || (item.playerIndexTheItemIsReservedFor == Player.whoAmI && magItem.ReserveCD > 0))
             {
                 return false;
             }
-            //TODO cursed vacancy checks
-            return ItemSelected(item);
+            if (ItemFitsInventory(item))
+            {
+                return IsItemSelected(item);
+            }
+            return false;
         }
         private void TargetItems()
         {
             List<Item> pool = MagSystem.ItemPool;
             Item item;
-            for (int i = pool.Count; i >= 0; i--)
+            for (int i = pool.Count - 1; i >= 0; i--)
             {
                 item = pool[i];
                 if (CanAttract(item))
@@ -116,7 +103,7 @@ namespace FavoriteMagnet
 
         public override void UpdateEquips()
         {
-            if (MagSystem.Timely)
+            if (MagSystem.Timely && Selection != Select.None)
             {
                 TargetItems();
             }
@@ -124,19 +111,25 @@ namespace FavoriteMagnet
         public override void SaveData(TagCompound tag)
         {
             tag.Add("Selection", Selection.Index);
-            tag.Add("Invert", Invert);
         }
         public override void LoadData(TagCompound tag)
         {
             Selection.Index = tag.GetInt("Selection");
-            Invert = tag.GetBool("Invert");
         }
     }
     public enum Select
     {
+        All,
         None,
         Favorite,
+        NotFavorite,
         Existing,
-        All
+        NotExisting
+    }
+    public enum ItemAction
+    {
+        None,
+        Encumber,
+        Exhaust
     }
 }

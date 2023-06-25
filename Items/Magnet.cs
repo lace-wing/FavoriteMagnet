@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 
-namespace FavoriteMagnet.Items
+namespace ItemMagnetPro.Items
 {
 	public class Magnet : ModItem
 	{
@@ -30,13 +30,16 @@ namespace FavoriteMagnet.Items
 
 		public override bool? UseItem(Player player)
 		{
-			if (player.itemAnimation == 2)
+			MagPlayer mag = player.GetModPlayer<MagPlayer>();
+			if (player.itemAnimation == 1)
 			{
 				if (player.altFunctionUse == 2)
 				{
+					mag.Selection -= 1;
 				}
 				else
 				{
+					mag.Selection += 1;
 				}
 			}
 			return base.UseItem(player);
@@ -54,6 +57,7 @@ namespace FavoriteMagnet.Items
 
 		public override void RightClick(Player player)
 		{
+			player.GetModPlayer<MagPlayer>().ItemBehavior += 1;
 		}
 
 		public override void AddRecipes()

@@ -1,0 +1,10 @@
+Mods: {
+	ItemMagnetPro: {
+		Items: {
+			Magnet: {
+				DisplayName: Magnet
+				Tooltip: ""
+			}
+		}
+	}
+}

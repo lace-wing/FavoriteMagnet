@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
 
-namespace FavoriteMagnet.InfoDisplays
+namespace ItemMagnetPro.InfoDisplays
 {
     public class AttractionInfoDisplay : InfoDisplay
     {
+        public readonly Color Encumber = Color.Yellow;
+        public readonly Color Exhaust = Color.Red;
         public LocalizedText Display { get; set; }
         public override void Load()
         {
@@ -26,7 +28,7 @@ namespace FavoriteMagnet.InfoDisplays
             Player p = Main.LocalPlayer;
             Select selection = Select.None;
             bool invert = false, e = false;
-            return Display.Value;
+            return p.GetModPlayer<MagPlayer>().Selection.Value.ToString();
         }
     }
 }
