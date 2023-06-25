@@ -1,0 +1,82 @@
+Mods: {
+	ItemMagnetPro: {
+		General:{
+			Di: "{0}{1}"
+			DiSpaced: "{0} {1}"
+		}
+
+		Items: {
+			Magnet: {
+				DisplayName: 物品磁铁Pro
+				Tooltip:
+					'''
+					允许你调整吸引物品的能力。
+					你有三种能力：
+					- 选择：只有选中的物品会被吸引。 （<left>）
+					- 额外操作：对物品进行额外操作。 （<right>）
+					- 途径：物品会以不同方式朝你吸来。 （在此物品上<right>）
+					你不必将此物留在背包中。
+					'''
+			}
+		}
+
+		Configs: {
+			MagConfig: {
+				DisplayName: 磁铁配置
+
+				RangeInTile: {
+					Label: 范围（格）
+					Tooltip: 吸引物品的范围。
+				}
+
+				DelayInSecond: {
+					Label: 延迟（秒）
+					Tooltip:
+						'''
+						上个持有物品的人能再次吸引该物品前的延迟。
+						物品被吸引后会取消延迟。
+						'''
+				}
+			}
+		}
+
+		InfoDisplays: {
+			Selections: {
+				All: 所有物品
+				None: 不吸引物品
+				Favorited: 仅收藏的物品
+				NotFavorited: 未收藏的物品
+				Existing: 背包中的物品
+				NotExisting: 不在背包中的物品
+			}
+
+			ItemActions: {
+				None: ""
+				Encumber: " !"
+				Exhaust: " x"
+			}
+		}
+
+		Tooltips: {
+			Selections: {
+				All: 吸引所有物品。
+				None: 不吸引物品。
+				Favorited: 仅吸引收藏的物品。
+				NotFavorited: 吸引未收藏的物品。
+				Existing: 仅吸引背包中的物品。
+				NotExisting: 吸引不在背包中的物品。
+			}
+
+			ItemActions: {
+				None: 正常拾取物品。
+				Encumber: 仅能拾取被吸引的物品。
+				Exhaust: 拾起被吸引的物品时将其销毁。
+			}
+
+			Approaches: {
+				Travel: 物品会飞向你。
+				Teleport: 物品会传送到你。
+			}
+		}
+	}
+}

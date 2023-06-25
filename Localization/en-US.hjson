@@ -34,7 +34,7 @@ Mods: {
 					Tooltip:
 						'''
 						Delay before the last holder of an item can attract the item again.
-						If the item is attracted, this delay will be reset to 0.
+						The delay is cancelled if the item is attracted.
 						'''
 				}
 			}
@@ -68,7 +68,7 @@ Mods: {
 			}
 
 			ItemActions: {
-				None: Items are to be picked up as ususal.
+				None: Items will be picked up as ususal.
 				Encumber: Only attracted items can be picked up.
 				Exhaust: Attracted items will be exhausted on pickup.
 			}
