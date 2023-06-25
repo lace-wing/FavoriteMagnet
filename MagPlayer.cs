@@ -13,6 +13,8 @@ namespace ItemMagnetPro
 {
     public class MagPlayer : ModPlayer
     {
+        public static int RangeSQ;
+        public static int Delay;
         public EnumNum<Select> Selection = new EnumNum<Select>();
         public EnumNum<ItemAction> ItemBehavior = new EnumNum<ItemAction>();
         private bool ItemFitsInventory(Item item, bool ignoreVanillaEncumber = true)
@@ -52,11 +54,11 @@ namespace ItemMagnetPro
             {
                 return true;
             }
-            if (Selection == Select.Favorite)
+            if (Selection == Select.Favorited)
             {
                 return SelectFavorited(item);
             }
-            if (Selection == Select.NotFavorite)
+            if (Selection == Select.NotFavorited)
             {
                 return !SelectFavorited(item);
             }
@@ -72,7 +74,7 @@ namespace ItemMagnetPro
         }
         private bool CanAttract(Item item)
         {
-            if (item.position.DistanceSQ(Player.Center) > 256 * 256)
+            if (item.position.DistanceSQ(Player.Center) > RangeSQ)
             {
                 return false;
             }
@@ -121,8 +123,8 @@ namespace ItemMagnetPro
     {
         All,
         None,
-        Favorite,
-        NotFavorite,
+        Favorited,
+        NotFavorited,
         Existing,
         NotExisting
     }

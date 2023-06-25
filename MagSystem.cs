@@ -9,7 +9,7 @@ namespace ItemMagnetPro
 {
     internal class MagSystem : ModSystem
     {
-        public static bool Timely => Main.GameUpdateCount % 30 == 0;
+        public static bool Timely => Main.GameUpdateCount % 15 == 0;
         public static List<Item> ItemPool = new List<Item>();
         public override void PreUpdatePlayers()
         {

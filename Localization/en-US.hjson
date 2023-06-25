@@ -2,8 +2,39 @@ Mods: {
 	ItemMagnetPro: {
 		Items: {
 			Magnet: {
-				DisplayName: Magnet
+				DisplayName: Magnet Pro
 				Tooltip: ""
+			}
+		}
+
+		Configs: {
+			MagConfig: {
+				DisplayName: Magnet Config
+
+				RangeInTile: {
+					Label: Range (tiles)
+					Tooltip: Range of item attraction.
+				}
+
+				DelayInSecond: {
+					Label: Delay (seconds)
+					Tooltip:
+						'''
+						Delay before the last holder of an item can attract the item again.
+						If the item is attracted, this delay will be reset to 0.
+						'''
+				}
+			}
+		}
+
+		InfoDisplays: {
+			Selections: {
+				All: Attract all
+				None: No attraction
+				Favorited: Favorited only
+				NotFavorited: Favorited excluded
+				Existing: Inventory only
+				NotExisting: Inventory excluded
 			}
 		}
 	}
