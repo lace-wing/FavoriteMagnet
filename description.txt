@@ -2,42 +2,55 @@
 
 Item Magnet Pro is a quality-of-life mod which adds an item attraction system and an item for you to configure it.
 
-[h3]With this mod, you can:[/h3]
+[h2]Why This Magnet?[/h2]
+- Easy to access
+- Easy to toggle (with a few clicks)
+- Easy to config (no spamming or confusing configs)
+- Rich and powerful functionality (see section Functionality below)
+
+[h3]Functionality[/h3]
 - Attract all items
 - Attract items marked as favorite only
 - Attract items already in your inventory only
 - And the inverses of all above!
+- Vacancy check, so that you will not be spammed by tons of items
 - Enable a Encumbered effect, similar to the vanilla ENcumbering Stone but items attracted are NOT AFFECTED!
-- Set a attraction delay (3s by default), pretty useful for MULTI-PLAYER MODE!
+- Exhaust all attracted items
+- Set a attraction delay (2s by default), pretty useful in multi-player
 - Configure attraction range
-- Use these features without an item taking up your inventory space
 
-[h3]How to use:[/h3]
+[h3]Guide[/h3]
 1. Get 4 Dirt Blocks, stand nearby a workbench (fairly easy to follow)
 2. Craft an item called 'Item Magnet Pro'
 3. Read it's tooltip and use it
 
 This mod is open-sourced on [url=https://github.com/lyc-Lacewing/FavoriteMagnet]GitHub[/url]
-
 --- --- ---
 
 [h1]物品磁铁Pro, 你值得一试的物品磁铁模组[/h1]
 
 物品磁铁Pro (ItemMagnetPro) 是一个加入了物品吸引系统和一个用于配置它的物品的辅助模组
 
-[h3]你可以借助此模组:[/h3]
+[h2]为什么是这块磁铁？[/h2]
+- 获取简单
+- 使用简单（仅需几下点击）
+- 配置简单（没有一大堆麻烦的配置）
+- 丰富且强大的功能（参见下方的 “功能”）
+
+[h3]功能[/h3]
 - 吸引所有物品
 - 吸引收藏的物品
 - 吸引背包内已有的物品
 - 并且可以反选上述所有吸引选项!
-- 开启其特有的负重石效果, 与原版的负重石相似, 但是被吸引的物品不受影响!
-- 设置重复吸引延迟 (默认3秒), 对多人模式十分有用!
-- 配置吸引范围
-- 无需让一个物品占用你的背包就能使用这些功能
+- 自动检测背包空间，你不会被一堆物品糊脸了
+- 开启其特有的负重石效果, 与原版的负重石相似, 但是被吸引的物品不受影响
+- 销毁吸引到的物品
+- 设置重复吸引延迟 (默认2秒), 对多人模式十分有用!
+- 设置吸引范围
 
-[h3]如何使用:[/h3]
-1. 收集4块土, 站在一个工作台旁边 (简单合理)
-2. 合成一个叫做 "物品磁铁神的恩赐" 的物品
+[h3]指南[/h3]
+1. 收集4块土, 站在一个工作台旁边 (这很容易)
+2. 合成一个叫做 "物品磁铁Pro" 的物品
 3. 阅读其描述并使用它
 
 此模组在[url=https://github.com/lyc-Lacewing/FavoriteMagnet]GitHub[/url]上开源

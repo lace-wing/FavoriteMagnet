@@ -89,7 +89,7 @@ Mods: {
 
 			Approaches: {
 				Travel: 物品会飞向你。
-				Teleport: 物品会传送到你。
+				Teleport: 物品会传送至你。
 			}
 		}
 	}
