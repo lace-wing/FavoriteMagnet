@@ -19,10 +19,14 @@ namespace ItemMagnetPro
         [DefaultValue(2)]
         public int DelayInSecond;
 
+        [DefaultValue(false)]
+        public bool SuperVaultCompact;
+
         private void UpdateConfig()
         {
             MagPlayer.RangeSQ = (int)Math.Pow(RangeInTile * 16, 2);
             MagPlayer.Delay = DelayInSecond * 60;
+            MagPlayer.SuperVault = SuperVaultCompact;
         }
 
         public override void OnLoaded()

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader.Config;
 using Terraria.ModLoader.IO;
 
 namespace ItemMagnetPro
@@ -15,9 +16,23 @@ namespace ItemMagnetPro
     {
         public static int RangeSQ;
         public static int Delay;
+        public static bool SuperVault;
         public EnumNum<Select> Selection = new EnumNum<Select>();
         public EnumNum<ItemAction> ItemAction = new EnumNum<ItemAction>();
         public EnumNum<Approach> Approach = new EnumNum<Approach>();
+        private Item[] GetInventories()
+        {
+            var inv = Player.inventory;
+            if (Player.IsVoidVaultEnabled)
+            {
+                inv = inv.Concat(Player.bank4.item).ToArray();
+            }
+            if (SuperVault)
+            {
+                inv = inv.Concat(Player.bank.item).Concat(Player.bank2.item).Concat(Player.bank3.item).ToArray();
+            }
+            return inv;
+        }
         private bool ItemFitsInventory(Item item, bool ignoreVanillaEncumber = true)
         {
             var status = Player.ItemSpace(item);
@@ -29,7 +44,7 @@ namespace ItemMagnetPro
         }
         private bool SelectFavorited(Item item)
         {
-            foreach (Item i in Player.inventory)
+            foreach (Item i in GetInventories())
             {
                 if (i.favorited && i.type == item.type)
                 {
@@ -40,7 +55,7 @@ namespace ItemMagnetPro
         }
         private bool SelectExisting(Item item)
         {
-            foreach (Item i in Player.inventory)
+            foreach (Item i in GetInventories())
             {
                 if (i.type == item.type)
                 {

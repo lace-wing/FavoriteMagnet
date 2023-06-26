@@ -37,6 +37,21 @@ Mods: {
 						The delay is cancelled if the item is attracted.
 						'''
 				}
+
+				SuperVaultCompact: {
+					Label: Super Vault Compactibility
+					Tooltip:
+						'''
+						Items in following personal inventories will be counted
+						in the magnet's 'in inventory' selection:
+						- Piggy Bank
+						- Safe
+						- Defender's Forge
+						This can be enabled if you have:
+						features like Quality of Life's 'Auto pickup for personal storage'
+						which make all personal inventories function as the Void Vault.
+						'''
+				}
 			}
 		}
 
