@@ -2,17 +2,24 @@
 
 Item Magnet Pro is a quality-of-life mod which adds an item attraction system and an item for you to configure it.
 
-[h3]With this mod, you can:[/h3]
+[h2]Why This Magnet?[/h2]
+- Easy to access
+- Easy to toggle (with a few clicks)
+- Easy to config (no spamming or confusing configs)
+- Rich and powerful functionality (see section Functionality below)
+
+[h3]Functionality[/h3]
 - Attract all items
 - Attract items marked as favorite only
 - Attract items already in your inventory only
 - And the inverses of all above!
+- Vacancy check, so that you will not be spammed by tons of items
 - Enable a Encumbered effect, similar to the vanilla ENcumbering Stone but items attracted are NOT AFFECTED!
-- Set a attraction delay (3s by default), pretty useful for MULTI-PLAYER MODE!
+- Exhaust all attracted items
+- Set a attraction delay (2s by default), pretty useful in multi-player
 - Configure attraction range
-- Use these features without an item taking up your inventory space
 
-[h3]How to use:[/h3]
+[h3]Guide[/h3]
 1. Get 4 Dirt Blocks, stand nearby a workbench (fairly easy to follow)
 2. Craft an item called 'Item Magnet Pro'
 3. Read it's tooltip and use it
